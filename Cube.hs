@@ -23,13 +23,8 @@ solvedCube = do
   (x, y) <- fieldsOnSide
   [(side, x, y, color)]
 
-testSolvedCube :: Bool
-testSolvedCube =
-  let sorted    = List.sort solvedCube == solvedCube
-      allColors = (== [White ..])   . List.nub . List.sort $ fmap (\(_, _, _, c) -> c)      solvedCube
-      allSides  = (== [Top ..])     . List.nub . List.sort $ fmap (\(s, _, _, _) -> s)      solvedCube
-      allFields = (== fieldsOnSide) . List.nub . List.sort $ fmap (\(_, x, y, _) -> (x, y)) solvedCube
-  in and [sorted, allColors, allSides, allFields]
+computeIndex :: (Side, Int, Int, Color) -> Int
+computeIndex (_, x, y, c) = x * 3 + y + fromEnum c * 9
 
 cubeToVector :: Cube -> Vector Z
 cubeToVector = LA.fromList . fmap go . List.sort
@@ -45,8 +40,3 @@ vectorToCube = zipWith go solvedCube . fmap toColor . LA.toList
 
     go :: (Side, Int, Int, Color) -> Color -> (Side, Int, Int, Color)
     go (s, x, y, _) c = (s, x, y, c)
-
-testFromToVector :: Bool
-testFromToVector =
-  let solvedCube' = vectorToCube $ cubeToVector solvedCube
-  in solvedCube' == solvedCube
