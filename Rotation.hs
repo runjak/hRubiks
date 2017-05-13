@@ -85,10 +85,24 @@ topTwistLeft :: MatrixRotation
 topTwistLeft = topTwistRight <> topTwistRight <> topTwistRight
 
 rightL :: MatrixRotation
-rightL = undefined
+rightL =
+  let vs = LA.toColumns identity
+      top    = fmap (vs !!) [ 0,  1, 33,  3,  4, 30,  6,  7, 27]
+      front  = fmap (vs !!) [ 9, 10,  2, 12, 13,  5, 15, 16,  8]
+      back   = fmap (vs !!) [53, 28, 29, 50, 31, 32, 47, 34, 35]
+      bottom = fmap (vs !!) [45, 46, 11, 48, 49, 14, 51, 52, 17]
+      {-
+        Index mapping for right:
+        [ 18, 19, 20     [ 20, 23, 26
+        , 21, 22, 23  -> , 19, 22, 25
+        , 24, 25, 26 ]   , 18, 21, 24 ]
+      -}
+      right = fmap (vs !!) [20, 23, 26, 19, 22, 25, 18, 21, 24]
+      left = take 9 $ drop 36 vs
+  in LA.fromColumns $ concat [top, front, right, back, left, bottom]
 
 rightR :: MatrixRotation
-rightR = undefined
+rightR = rightL <> rightL <> rightL
 
 leftL :: MatrixRotation
 leftL = undefined
