@@ -117,17 +117,17 @@ leftL =
 leftR :: MatrixRotation
 leftR = leftL <> leftL <> leftL
 
-upL :: MatrixRotation
-upL = undefined
+topL :: MatrixRotation
+topL = undefined
 
-upR :: MatrixRotation
-upR = undefined
+topR :: MatrixRotation
+topR = undefined
 
-downL :: MatrixRotation
-downL = undefined
+bottomL :: MatrixRotation
+bottomL = undefined
 
-downR :: MatrixRotation
-downR = undefined
+bottomR :: MatrixRotation
+bottomR = undefined
 
 frontL :: MatrixRotation
 frontL = undefined
