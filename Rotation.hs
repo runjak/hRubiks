@@ -118,10 +118,10 @@ leftR :: MatrixRotation
 leftR = leftL <> leftL <> leftL
 
 topL :: MatrixRotation
-topL = undefined
+topL = topToRight <> rightL <> topToLeft
 
 topR :: MatrixRotation
-topR = undefined
+topR = topL <> topL <> topL
 
 bottomL :: MatrixRotation
 bottomL = undefined

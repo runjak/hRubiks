@@ -96,6 +96,23 @@ testLeftL =
 testLeftR :: Bool
 testLeftR = testRotations leftR
 
+testTopL =
+  let [top, frn, rgt, bck, lft, bot] = [Cube.Top ..]
+      [w, g, r, b, o, y] = [Cube.White ..]
+      expected = [ (top, 0, 0, w), (top, 0, 1, w), (top, 0, 2, w), (top, 1, 0, w), (top, 1, 1, w), (top, 1, 2, w), (top, 2, 0, w), (top, 2, 1, w), (top, 2, 2, w)
+                 , (frn, 0, 0, o), (frn, 0, 1, o), (frn, 0, 2, o), (frn, 1, 0, g), (frn, 1, 1, g), (frn, 1, 2, g), (frn, 2, 0, g), (frn, 2, 1, g), (frn, 2, 2, g)
+                 , (rgt, 0, 0, g), (rgt, 0, 1, g), (rgt, 0, 2, g), (rgt, 1, 0, r), (rgt, 1, 1, r), (rgt, 1, 2, r), (rgt, 2, 0, r), (rgt, 2, 1, r), (rgt, 2, 2, r)
+                 , (bck, 0, 0, r), (bck, 0, 1, r), (bck, 0, 2, r), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, b)
+                 , (lft, 0, 0, b), (lft, 0, 1, b), (lft, 0, 2, b), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
+                 , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, y) ]
+      rotated = toCubeRotation (toVectorRotation topL) Cube.solvedCube
+  in rotated
+  -- in expected == rotated
+  -- && testRotations topL
+
+testTopR :: Bool
+testTopR = testRotations topR
+
 tests = [ ("topToFront", testTopToFront)
         , ("topToBack", testTopToBack)
         , ("topToRight", testTopToRight)
