@@ -1,5 +1,6 @@
 module Cube where
 
+import Data.Function (on)
 import Numeric.LinearAlgebra (Z, Vector)
 import qualified Data.List as List
 import qualified Numeric.LinearAlgebra as LA
@@ -27,8 +28,10 @@ computeIndex :: (Side, Int, Int, Color) -> Int
 computeIndex (_, x, y, c) = x * 3 + y + fromEnum c * 9
 
 cubeToVector :: Cube -> Vector Z
-cubeToVector = LA.fromList . fmap go . List.sort
+cubeToVector = LA.fromList . fmap go . List.sortBy (compare `on` project)
   where
+    project (a,b,c,_) = (a,b,c)
+
     go :: (Side, Int, Int, Color) -> Z
     go (_, _, _, c) = fromIntegral $ fromEnum c
 
