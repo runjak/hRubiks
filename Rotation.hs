@@ -17,6 +17,14 @@ toVectorRotation = (#>)
 
 type MatrixRotation = Matrix Z
 
+showMatrixRotation :: MatrixRotation -> String
+showMatrixRotation = show . fmap (go 0 . LA.toList) . LA.toColumns
+  where
+    go i [] = i
+    go i (v:vs)
+      | v == 1 = i
+      | otherwise = go (i + 1) vs
+
 dim :: (Int, Int)
 dim = let d = 9*6 in (d, d)
 
