@@ -79,6 +79,7 @@ testRightL =
 testRightR :: Bool
 testRightR = testRotations rightR
 
+testLeftL :: Bool
 testLeftL =
   let [top, frn, rgt, bck, lft, bot] = [Cube.Top ..]
       [w, g, r, b, o, y] = [Cube.White ..]
@@ -92,6 +93,7 @@ testLeftL =
   in expected == rotated
   && testRotations leftL
 
+testLeftR :: Bool
 testLeftR = testRotations leftR
 
 tests = [ ("topToFront", testTopToFront)
@@ -102,6 +104,6 @@ tests = [ ("topToFront", testTopToFront)
         , ("topTwistLeft", testTopTwistLeft)
         , ("rightL", testRightL)
         , ("rightR", testRightR)
-        , ("leftL", False)
+        , ("leftL", testLeftL)
         , ("leftR", testLeftR)
         ]
