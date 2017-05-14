@@ -112,26 +112,7 @@ rightR = rightL <> rightL <> rightL
 leftL :: MatrixRotation
 leftL =
   let twist = topTwistRight <> topTwistRight
-  in twist <> rightL <> twist
-
-{-
-  [  9,  1,  2, 12,  4,  5, 15,  7,  8
-  , 45, 10, 11, 48, 13, 14, 51, 16, 17
-  , 18, 19, 20, 21, 22, 23, 24, 25, 26
-  , 27, 28,  6, 30, 31,  3, 33, 34,  0
-  , 38, 41, 44, 37, 40, 43, 36, 39, 42
-  , 35, 46, 47, 32, 49, 50, 29, 52, 53 ]
--}
-leftL' :: MatrixRotation
-leftL' =
-  let vs = LA.toColumns identity
-      cols = [  9,  1,  2, 12,  4,  5, 15,  7,  8
-             , 45, 10, 11, 48, 13, 14, 51, 16, 17
-             , 18, 19, 20, 21, 22, 23, 24, 25, 26
-             , 27, 28,  6, 30, 31,  3, 33, 34,  0
-             , 38, 41, 44, 37, 40, 43, 36, 39, 42
-             , 35, 46, 47, 32, 49, 50, 29, 52, 53 ]
-  in LA.fromColumns $ fmap (vs !!) cols
+  in twist <> rightR <> twist
 
 leftR :: MatrixRotation
 leftR = leftL <> leftL <> leftL

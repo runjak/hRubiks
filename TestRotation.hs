@@ -89,9 +89,8 @@ testLeftL =
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, b), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, b), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, b), (bot, 2, 1, y), (bot, 2, 2, y) ]
       rotated = toCubeRotation (toVectorRotation leftL) Cube.solvedCube
-  in (rotated, expected :: Cube)
--- in expected == rotated
--- && testRotations leftL
+  in expected == rotated
+  && testRotations leftL
 
 testLeftR = testRotations leftR
 
