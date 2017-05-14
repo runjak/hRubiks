@@ -23,9 +23,6 @@ dim = let d = 9*6 in (d, d)
 identity :: Matrix Z
 identity = LA.ident $ fst dim
 
-rotateIdentity :: MatrixRotation -> MatrixRotation
-rotateIdentity m = m <> m <> m <> m
-
 topToFront :: MatrixRotation
 topToFront =
   let vs = LA.toColumns identity
