@@ -25,34 +25,19 @@ showMatrixRotation = show . fmap (go 0 . LA.toList) . LA.toColumns
       | v == 1 = i
       | otherwise = go (i + 1) vs
 
-dim :: (Int, Int)
-dim = let d = 9*6 in (d, d)
-
-identity :: Matrix Z
-identity = LA.ident $ fst dim
+identity :: MatrixRotation
+identity = LA.ident $ 9 * 6
 
 topToFront :: MatrixRotation
 topToFront =
   let vs = LA.toColumns identity
-      top    = take 9 vs
-      front  = take 9 $ drop 9 vs
-      {-
-        Index mapping for right:
-        [ 18, 19, 20     [ 20, 23, 26
-        , 21, 22, 23  -> , 19, 22, 25
-        , 24, 25, 26 ]   , 18, 21, 24 ]
-      -}
-      right' = fmap (vs !!) [20, 23, 26, 19, 22, 25, 18, 21, 24]
-      back   = take 9 $ drop 27 vs
-      {-
-        Index mapping for left:
-        [ 36, 37, 38     [ 38, 41, 44
-        , 39, 40, 41  -> , 37, 40, 43
-        , 42, 43, 44 ]   , 36, 39, 42 ]
-      -}
-      left'  = fmap (vs !!) [38, 41, 44, 37, 40, 43, 36, 39, 42]
-      bottom = drop 45 vs
-  in LA.fromColumns $ concat [front, bottom, right', top, left', back]
+      mapping = [  9, 10, 11, 12, 13, 14, 15, 16, 17
+                , 45, 46, 47, 48, 49, 50, 51, 52, 53
+                , 24, 21, 18, 25, 22, 19, 26, 23, 20
+                ,  8,  7,  6,  5,  4,  3,  2,  1,  0
+                , 38, 41, 44, 37, 40, 43, 36, 39, 42
+                , 35, 34, 33, 32, 31, 30, 29, 28, 27 ]
+  in LA.fromColumns $ fmap (vs !!) mapping
 
 topToBack :: MatrixRotation
 topToBack = topToFront <> topToFront <> topToFront
@@ -60,25 +45,13 @@ topToBack = topToFront <> topToFront <> topToFront
 topToRight :: MatrixRotation
 topToRight =
   let vs = LA.toColumns identity
-      top = take 9 vs
-      {-
-        Index mapping for front:
-        [  9, 10, 11     [ 15, 12, 9
-        , 12, 13, 14  -> , 16, 13, 10
-        , 15, 16, 17 ]   , 17, 14, 11 ]
-      -}
-      front' = fmap (vs !!) [15, 12, 9, 16, 13, 10, 17, 14, 11]
-      right = take 9 $ drop 18 vs
-      {-
-        Index mapping for back:
-        [ 27, 28, 29     [ 29, 32, 35
-        , 30, 31, 32  -> , 28, 31, 34
-        , 33, 34, 35 ]   , 27, 30, 33 ]
-      -}
-      back' = fmap (vs !!) [29, 32, 35, 28, 31, 34, 27, 30, 33]
-      left = take 9 $ drop 36 vs
-      bottom = drop 45 vs
-  in LA.fromColumns $ concat [right, front', bottom, back', top, left]
+      mapping = [ 20, 23, 26, 19, 22, 25, 18, 21, 24
+                , 11, 14, 17, 10, 13, 16,  9, 12, 15
+                , 47, 50, 53, 46, 49, 52, 45, 48, 51
+                , 33, 30, 27, 34, 31, 28, 35, 32, 29
+                ,  2,  5,  8,  1,  4,  7,  0,  3,  6
+                , 38, 41, 44, 37, 40, 43, 36, 39, 42 ]
+  in LA.fromColumns $ fmap (vs !!) mapping
 
 topToLeft :: MatrixRotation
 topToLeft = topToRight <> topToRight <> topToRight
@@ -92,19 +65,13 @@ topTwistLeft = topTwistRight <> topTwistRight <> topTwistRight
 rightL :: MatrixRotation
 rightL =
   let vs = LA.toColumns identity
-      top    = fmap (vs !!) [ 0,  1, 33,  3,  4, 30,  6,  7, 27]
-      front  = fmap (vs !!) [ 9, 10,  2, 12, 13,  5, 15, 16,  8]
-      back   = fmap (vs !!) [53, 28, 29, 50, 31, 32, 47, 34, 35]
-      bottom = fmap (vs !!) [45, 46, 11, 48, 49, 14, 51, 52, 17]
-      {-
-        Index mapping for right:
-        [ 18, 19, 20     [ 20, 23, 26
-        , 21, 22, 23  -> , 19, 22, 25
-        , 24, 25, 26 ]   , 18, 21, 24 ]
-      -}
-      right = fmap (vs !!) [20, 23, 26, 19, 22, 25, 18, 21, 24]
-      left = take 9 $ drop 36 vs
-  in LA.fromColumns $ concat [top, front, right, back, left, bottom]
+      mapping = [  0,  1, 33,  3,  4, 30,  6,  7, 27
+                ,  9, 10,  2, 12, 13,  5, 15, 16,  8
+                , 20, 23, 26, 19, 22, 25, 18, 21, 24
+                , 53, 28, 29, 50, 31, 32, 47, 34, 35
+                , 36, 37, 38, 39, 40, 41, 42, 43, 44
+                , 45, 46, 11, 48, 49, 14, 51, 52, 17 ]
+  in LA.fromColumns $ fmap (vs !!) mapping
 
 rightR :: MatrixRotation
 rightR = rightL <> rightL <> rightL
@@ -127,16 +94,16 @@ bottomL :: MatrixRotation
 bottomL = undefined
 
 bottomR :: MatrixRotation
-bottomR = undefined
+bottomR = bottomL <> bottomL <> bottomL
 
 frontL :: MatrixRotation
 frontL = undefined
 
 frontR :: MatrixRotation
-frontR = undefined
+frontR = frontL <> frontL <> frontL
 
 backL :: MatrixRotation
 backL = undefined
 
 backR :: MatrixRotation
-backR = undefined
+backR = backL <> backL <> backL
