@@ -129,9 +129,9 @@ testBottomL =
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, o), (bck, 2, 1, o), (bck, 2, 2, o)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, g), (lft, 2, 1, g), (lft, 2, 2, g)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, y) ]
-      rotated = toCubeRotation (toVectorRotation frontL) Cube.solvedCube
+      rotated = toCubeRotation (toVectorRotation bottomL) Cube.solvedCube
   in expected == rotated
-  && testRotations frontL
+  && testRotations bottomL
 
 testBottomR :: Bool
 testBottomR = testRotations bottomR
@@ -161,11 +161,11 @@ testBackL =
                  , (frn, 0, 0, g), (frn, 0, 1, g), (frn, 0, 2, g), (frn, 1, 0, g), (frn, 1, 1, g), (frn, 1, 2, g), (frn, 2, 0, g), (frn, 2, 1, g), (frn, 2, 2, g)
                  , (rgt, 0, 0, r), (rgt, 0, 1, r), (rgt, 0, 2, w), (rgt, 1, 0, r), (rgt, 1, 1, r), (rgt, 1, 2, w), (rgt, 2, 0, r), (rgt, 2, 1, r), (rgt, 2, 2, w)
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, b)
-                 , (lft, 0, 0, y), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, y), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, y), (lft, 2, 1, o), (lft, 2, 2, w)
+                 , (lft, 0, 0, y), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, y), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, y), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, r), (bot, 2, 1, r), (bot, 2, 2, r) ]
-      rotated = toCubeRotation (toVectorRotation frontL) Cube.solvedCube
+      rotated = toCubeRotation (toVectorRotation backL) Cube.solvedCube
   in expected == rotated
-  && testRotations frontL
+  && testRotations backL
 
 testBackR :: Bool
 testBackR = testRotations backR
@@ -182,4 +182,10 @@ tests = [ ("topToFront", testTopToFront)
         , ("leftR", testLeftR)
         , ("topL", testTopL)
         , ("topR", testTopR)
+        , ("bottomL", testBottomL)
+        , ("bottomR", testBottomR)
+        , ("frontL", testFrontL)
+        , ("frontR", testFrontR)
+        , ("backL", testBackL)
+        , ("backR", testBackR)
         ]

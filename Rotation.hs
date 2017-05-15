@@ -91,19 +91,23 @@ topR :: MatrixRotation
 topR = topL <> topL <> topL
 
 bottomL :: MatrixRotation
-bottomL = undefined
+bottomL =
+  let twist = topToRight <> topToRight
+  in twist <> topL <> twist
 
 bottomR :: MatrixRotation
 bottomR = bottomL <> bottomL <> bottomL
 
 frontL :: MatrixRotation
-frontL = undefined
+frontL = topTwistRight <> rightR <> topTwistLeft
 
 frontR :: MatrixRotation
 frontR = frontL <> frontL <> frontL
 
 backL :: MatrixRotation
-backL = undefined
+backL =
+  let twist = topTwistLeft <> topTwistLeft
+  in twist <> frontL <> twist
 
 backR :: MatrixRotation
 backR = backL <> backL <> backL
