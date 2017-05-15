@@ -85,7 +85,7 @@ leftR :: MatrixRotation
 leftR = leftL <> leftL <> leftL
 
 topL :: MatrixRotation
-topL = topToRight <> rightL <> topToLeft
+topL = topToLeft <> rightR <> topToRight
 
 topR :: MatrixRotation
 topR = topL <> topL <> topL
