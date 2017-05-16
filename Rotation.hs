@@ -65,12 +65,12 @@ topTwistLeft = topTwistRight <> topTwistRight <> topTwistRight
 rightL :: MatrixRotation
 rightL =
   let vs = LA.toColumns identity
-      mapping = [  0,  1, 33,  3,  4, 30,  6,  7, 27
-                ,  9, 10,  2, 12, 13,  5, 15, 16,  8
-                , 20, 23, 26, 19, 22, 25, 18, 21, 24
-                , 53, 28, 29, 50, 31, 32, 47, 34, 35
+      mapping = [  0,  1, 11,  3,  4, 14,  6,  7, 17
+                ,  9, 10, 47, 12, 13, 50, 15, 16, 53
+                , 24, 21, 18, 25, 22, 19, 26, 23, 20
+                ,  8, 28, 29,  5, 31, 32,  2, 34, 35
                 , 36, 37, 38, 39, 40, 41, 42, 43, 44
-                , 45, 46, 11, 48, 49, 14, 51, 52, 17 ]
+                , 45, 46, 33, 48, 49, 30, 51, 52, 27 ]
   in LA.fromColumns $ fmap (vs !!) mapping
 
 rightR :: MatrixRotation
@@ -79,13 +79,13 @@ rightR = rightL <> rightL <> rightL
 leftL :: MatrixRotation
 leftL =
   let twist = topTwistRight <> topTwistRight
-  in twist <> rightR <> twist
+  in twist <> rightL <> twist
 
 leftR :: MatrixRotation
 leftR = leftL <> leftL <> leftL
 
 topL :: MatrixRotation
-topL = topToLeft <> rightR <> topToRight
+topL = topToLeft <> rightL <> topToRight
 
 topR :: MatrixRotation
 topR = topL <> topL <> topL
@@ -99,7 +99,7 @@ bottomR :: MatrixRotation
 bottomR = bottomL <> bottomL <> bottomL
 
 frontL :: MatrixRotation
-frontL = topTwistRight <> rightR <> topTwistLeft
+frontL = topTwistRight <> rightL <> topTwistLeft
 
 frontR :: MatrixRotation
 frontR = frontL <> frontL <> frontL

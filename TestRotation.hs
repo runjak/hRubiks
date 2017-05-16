@@ -72,12 +72,12 @@ testRightL :: Bool
 testRightL =
   let [top, frn, rgt, bck, lft, bot] = [Cube.Top ..]
       [w, g, r, b, o, y] = [Cube.White ..]
-      expected = [ (top, 0, 0, w), (top, 0, 1, w), (top, 0, 2, g), (top, 1, 0, w), (top, 1, 1, w), (top, 1, 2, g), (top, 2, 0, w), (top, 2, 1, w), (top, 2, 2, g)
-                 , (frn, 0, 0, g), (frn, 0, 1, g), (frn, 0, 2, y), (frn, 1, 0, g), (frn, 1, 1, g), (frn, 1, 2, y), (frn, 2, 0, g), (frn, 2, 1, g), (frn, 2, 2, y)
+      expected = [ (top, 0, 0, w), (top, 0, 1, w), (top, 0, 2, b), (top, 1, 0, w), (top, 1, 1, w), (top, 1, 2, b), (top, 2, 0, w), (top, 2, 1, w), (top, 2, 2, b)
+                 , (frn, 0, 0, g), (frn, 0, 1, g), (frn, 0, 2, w), (frn, 1, 0, g), (frn, 1, 1, g), (frn, 1, 2, w), (frn, 2, 0, g), (frn, 2, 1, g), (frn, 2, 2, w)
                  , (rgt, 0, 0, r), (rgt, 0, 1, r), (rgt, 0, 2, r), (rgt, 1, 0, r), (rgt, 1, 1, r), (rgt, 1, 2, r), (rgt, 2, 0, r), (rgt, 2, 1, r), (rgt, 2, 2, r)
-                 , (bck, 0, 0, w), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, w), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, w), (bck, 2, 1, b), (bck, 2, 2, b)
+                 , (bck, 0, 0, y), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, y), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, y), (bck, 2, 1, b), (bck, 2, 2, b)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
-                 , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, b), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, b), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, b) ]
+                 , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, g), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, g), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, g) ]
       rotated = toCubeRotation (toVectorRotation rightL) Cube.solvedCube
   in expected == rotated
   && testRotations rightL
@@ -170,22 +170,38 @@ testBackL =
 testBackR :: Bool
 testBackR = testRotations backR
 
-tests = [ ("topToFront", testTopToFront)
-        , ("topToBack", testTopToBack)
-        , ("topToRight", testTopToRight)
-        , ("topToLeft", testTopToLeft)
-        , ("topTwistRight", testTopTwistRight)
-        , ("topTwistLeft", testTopTwistLeft)
-        , ("rightL", testRightL)
-        , ("rightR", testRightR)
-        , ("leftL", testLeftL)
-        , ("leftR", testLeftR)
-        , ("topL", testTopL)
-        , ("topR", testTopR)
-        , ("bottomL", testBottomL)
-        , ("bottomR", testBottomR)
-        , ("frontL", testFrontL)
-        , ("frontR", testFrontR)
-        , ("backL", testBackL)
-        , ("backR", testBackR)
+testCombined :: Bool
+testCombined =
+  let [top, frn, rgt, bck, lft, bot] = [Cube.Top ..]
+      [w, g, r, b, o, y] = [Cube.White ..]
+      expected = [ (top, 0, 0, o), (top, 0, 1, o), (top, 0, 2, b), (top, 1, 0, o), (top, 1, 1, w), (top, 1, 2, b), (top, 2, 0, o), (top, 2, 1, r), (top, 2, 2, r)
+                 , (frn, 0, 0, b), (frn, 0, 1, g), (frn, 0, 2, w), (frn, 1, 0, y), (frn, 1, 1, g), (frn, 1, 2, w), (frn, 2, 0, y), (frn, 2, 1, y), (frn, 2, 2, b)
+                 , (rgt, 0, 0, g), (rgt, 0, 1, r), (rgt, 0, 2, w), (rgt, 1, 0, g), (rgt, 1, 1, r), (rgt, 1, 2, w), (rgt, 2, 0, y), (rgt, 2, 1, y), (rgt, 2, 2, o)
+                 , (bck, 0, 0, r), (bck, 0, 1, b), (bck, 0, 2, g), (bck, 1, 0, r), (bck, 1, 1, b), (bck, 1, 2, w), (bck, 2, 0, y), (bck, 2, 1, y), (bck, 2, 2, g)
+                 , (lft, 0, 0, w), (lft, 0, 1, w), (lft, 0, 2, w), (lft, 1, 0, b), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, y), (lft, 2, 1, g), (lft, 2, 2, r)
+                 , (bot, 0, 0, g), (bot, 0, 1, g), (bot, 0, 2, r), (bot, 1, 0, o), (bot, 1, 1, y), (bot, 1, 2, r), (bot, 2, 0, o), (bot, 2, 1, b), (bot, 2, 2, b) ]
+      rotation = bottomL <> leftL <> backL <> rightL <> frontL <> topL
+      rotated = toCubeRotation (toVectorRotation rotation) Cube.solvedCube
+  in expected == rotated
+  && testRotations backL
+
+tests = [ ("Rotation.topToFront", testTopToFront)
+        , ("Rotation.topToBack", testTopToBack)
+        , ("Rotation.topToRight", testTopToRight)
+        , ("Rotation.topToLeft", testTopToLeft)
+        , ("Rotation.topTwistRight", testTopTwistRight)
+        , ("Rotation.topTwistLeft", testTopTwistLeft)
+        , ("Rotation.rightL", testRightL)
+        , ("Rotation.rightR", testRightR)
+        , ("Rotation.leftL", testLeftL)
+        , ("Rotation.leftR", testLeftR)
+        , ("Rotation.topL", testTopL)
+        , ("Rotation.topR", testTopR)
+        , ("Rotation.bottomL", testBottomL)
+        , ("Rotation.bottomR", testBottomR)
+        , ("Rotation.frontL", testFrontL)
+        , ("Rotation.frontR", testFrontR)
+        , ("Rotation.backL", testBackL)
+        , ("Rotation.backR", testBackR)
+        , ("combined", testCombined)
         ]
