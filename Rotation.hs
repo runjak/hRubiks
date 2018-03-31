@@ -1,9 +1,13 @@
 module Rotation where
 
-import Cube (Cube, cubeToVector, vectorToCube)
+import Control.Monad
 import Numeric.LinearAlgebra ((<>), (#>), Z, Vector, Matrix)
-import qualified Cube as Cube
 import qualified Numeric.LinearAlgebra as LA
+import qualified Data.List as List
+import qualified Data.Maybe as Maybe
+
+import Cube (Cube, cubeToVector, vectorToCube)
+import qualified Cube as Cube
 
 type CubeRotation = Cube -> Cube
 
@@ -111,3 +115,35 @@ backL =
 
 backR :: MatrixRotation
 backR = backL <> backL <> backL
+
+rotations :: [(MatrixRotation, String)]
+rotations = [
+    (identity, "identity")
+  , (topToFront, "topToFront")
+  , (topToBack, "topToBack")
+  , (topToRight, "topToRight")
+  , (topToLeft, "topToLeft")
+  , (topTwistRight, "topTwistRight")
+  , (topTwistLeft, "topTwistLeft")
+  , (rightL, "rightL")
+  , (rightR, "rightR")
+  , (leftL, "leftL")
+  , (leftR, "leftR")
+  , (topL, "topL")
+  , (topR, "topR")
+  , (bottomL, "bottomL")
+  , (bottomR, "bottomR")
+  , (frontL, "frontL")
+  , (frontR, "frontR")
+  , (backL, "backL")
+  , (backR, "backR")
+  ]
+
+nameMatrixRotation :: MatrixRotation -> String
+nameMatrixRotation = Maybe.fromMaybe "unknown" . flip List.lookup rotations
+
+inverse :: MatrixRotation -> Maybe MatrixRotation
+inverse r = Maybe.listToMaybe $ do
+  r' <- map fst rotations
+  guard $ r <> r' == identity
+  return r'

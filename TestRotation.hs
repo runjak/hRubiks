@@ -185,6 +185,19 @@ testCombined =
   in expected == rotated
   && testRotations backL
 
+testNameMatrixRotation :: Bool
+testNameMatrixRotation = and $ do
+  (r, n) <- rotations
+  let n' = nameMatrixRotation r
+  return $ n == n'
+
+testInverse :: Bool
+testInverse = and $ do
+  (r, _) <- rotations
+  let (Just r') = inverse r
+  let (Just r'') = inverse r'
+  return $ r == r''
+
 tests = [ ("Rotation.topToFront", testTopToFront)
         , ("Rotation.topToBack", testTopToBack)
         , ("Rotation.topToRight", testTopToRight)
@@ -204,4 +217,6 @@ tests = [ ("Rotation.topToFront", testTopToFront)
         , ("Rotation.backL", testBackL)
         , ("Rotation.backR", testBackR)
         , ("combined", testCombined)
+        , ("Rotation.nameMatrixRotation", testNameMatrixRotation)
+        , ("Rotation.inverse", testInverse)
         ]
