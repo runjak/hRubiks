@@ -7,11 +7,6 @@ import qualified Numeric.LinearAlgebra as LA
 
 type N = Integer
 
-fromRotation :: MatrixRotation -> N
-fromRotation = sum . zipWith3 go facs multiplierMappings . toNumbers
-  where
-    go fac multiplierMapping n = fac * multiplierMapping n
-
 toNumbers :: MatrixRotation -> [N]
 toNumbers = map (go 0 . LA.toList) . LA.toColumns
   where
@@ -29,10 +24,25 @@ facs =
     fac n = n * fac (n - 1)
 
 multiplierMappings :: [N -> N]
-multiplierMappings = map multiplierFor [0..]
+multiplierMappings = map mappingFor [0..]
   where
-    multiplierFor :: Integer -> Integer -> Integer
-    multiplierFor n m
+    mappingFor :: Integer -> Integer -> Integer
+    mappingFor n m
       | n == m = 0
       | n < m = m
       | otherwise = m + 1
+
+fromRotation :: MatrixRotation -> N
+fromRotation = sum . zipWith3 go facs multiplierMappings . toNumbers
+  where
+    go fac multiplierMapping n = fac * multiplierMapping n
+
+-- toRotation :: N -> MatrixRotation
+toRotation = go facs
+  where
+    go [] _ = []
+    go (f:fs) n
+      | n >= f =
+        let (d, r) = n `divMod` f
+        in d : go fs r
+      | otherwise = 0 : go fs n
