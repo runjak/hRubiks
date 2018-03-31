@@ -24,7 +24,7 @@ testTopToFront =
                  , (bck, 0, 0, y), (bck, 0, 1, y), (bck, 0, 2, y), (bck, 1, 0, y), (bck, 1, 1, y), (bck, 1, 2, y), (bck, 2, 0, y), (bck, 2, 1, y), (bck, 2, 2, y)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, g), (bot, 0, 1, g), (bot, 0, 2, g), (bot, 1, 0, g), (bot, 1, 1, g), (bot, 1, 2, g), (bot, 2, 0, g), (bot, 2, 1, g), (bot, 2, 2, g) ]
-      rotated = toCubeRotation (toVectorRotation topToFront) Cube.solvedCube
+      rotated = rotate topToFront Cube.solvedCube
   in expected == rotated
   && testRotations topToFront
 
@@ -44,7 +44,7 @@ testTopToRight =
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, b)
                  , (lft, 0, 0, y), (lft, 0, 1, y), (lft, 0, 2, y), (lft, 1, 0, y), (lft, 1, 1, y), (lft, 1, 2, y), (lft, 2, 0, y), (lft, 2, 1, y), (lft, 2, 2, y)
                  , (bot, 0, 0, r), (bot, 0, 1, r), (bot, 0, 2, r), (bot, 1, 0, r), (bot, 1, 1, r), (bot, 1, 2, r), (bot, 2, 0, r), (bot, 2, 1, r), (bot, 2, 2, r) ]
-      rotated = toCubeRotation (toVectorRotation topToRight) Cube.solvedCube
+      rotated = rotate topToRight Cube.solvedCube
   in expected == rotated
   && testRotations topToRight
 
@@ -61,7 +61,7 @@ testTopTwistRight =
                  , (bck, 0, 0, o), (bck, 0, 1, o), (bck, 0, 2, o), (bck, 1, 0, o), (bck, 1, 1, o), (bck, 1, 2, o), (bck, 2, 0, o), (bck, 2, 1, o), (bck, 2, 2, o)
                  , (lft, 0, 0, g), (lft, 0, 1, g), (lft, 0, 2, g), (lft, 1, 0, g), (lft, 1, 1, g), (lft, 1, 2, g), (lft, 2, 0, g), (lft, 2, 1, g), (lft, 2, 2, g)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, y) ]
-      rotated = toCubeRotation (toVectorRotation topTwistRight) Cube.solvedCube
+      rotated = rotate topTwistRight Cube.solvedCube
   in expected == rotated
   && testRotations topTwistRight
 
@@ -78,7 +78,7 @@ testRightL =
                  , (bck, 0, 0, y), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, y), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, y), (bck, 2, 1, b), (bck, 2, 2, b)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, g), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, g), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, g) ]
-      rotated = toCubeRotation (toVectorRotation rightL) Cube.solvedCube
+      rotated = rotate rightL Cube.solvedCube
   in expected == rotated
   && testRotations rightL
 
@@ -95,7 +95,7 @@ testLeftL =
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, w), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, w), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, w)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, b), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, b), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, b), (bot, 2, 1, y), (bot, 2, 2, y) ]
-      rotated = toCubeRotation (toVectorRotation leftL) Cube.solvedCube
+      rotated = rotate leftL Cube.solvedCube
   in expected == rotated
   && testRotations leftL
 
@@ -103,7 +103,7 @@ testLeftR :: Bool
 testLeftR = testRotations leftR
 
 testTopL :: Bool
-testTopL =  -- FIXME
+testTopL =
   let [top, frn, rgt, bck, lft, bot] = [Cube.Top ..]
       [w, g, r, b, o, y] = [Cube.White ..]
       expected = [ (top, 0, 0, w), (top, 0, 1, w), (top, 0, 2, w), (top, 1, 0, w), (top, 1, 1, w), (top, 1, 2, w), (top, 2, 0, w), (top, 2, 1, w), (top, 2, 2, w)
@@ -112,7 +112,7 @@ testTopL =  -- FIXME
                  , (bck, 0, 0, r), (bck, 0, 1, r), (bck, 0, 2, r), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, b)
                  , (lft, 0, 0, b), (lft, 0, 1, b), (lft, 0, 2, b), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, y) ]
-      rotated = toCubeRotation (toVectorRotation topL) Cube.solvedCube
+      rotated = rotate topL Cube.solvedCube
   in expected == rotated
   && testRotations topL
 
@@ -129,7 +129,7 @@ testBottomL =
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, o), (bck, 2, 1, o), (bck, 2, 2, o)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, g), (lft, 2, 1, g), (lft, 2, 2, g)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, y) ]
-      rotated = toCubeRotation (toVectorRotation bottomL) Cube.solvedCube
+      rotated = rotate bottomL Cube.solvedCube
   in expected == rotated
   && testRotations bottomL
 
@@ -146,7 +146,7 @@ testFrontL =
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, b)
                  , (lft, 0, 0, o), (lft, 0, 1, o), (lft, 0, 2, w), (lft, 1, 0, o), (lft, 1, 1, o), (lft, 1, 2, w), (lft, 2, 0, o), (lft, 2, 1, o), (lft, 2, 2, w)
                  , (bot, 0, 0, o), (bot, 0, 1, o), (bot, 0, 2, o), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, y), (bot, 2, 1, y), (bot, 2, 2, y) ]
-      rotated = toCubeRotation (toVectorRotation frontL) Cube.solvedCube
+      rotated = rotate frontL Cube.solvedCube
   in expected == rotated
   && testRotations frontL
 
@@ -163,7 +163,7 @@ testBackL =
                  , (bck, 0, 0, b), (bck, 0, 1, b), (bck, 0, 2, b), (bck, 1, 0, b), (bck, 1, 1, b), (bck, 1, 2, b), (bck, 2, 0, b), (bck, 2, 1, b), (bck, 2, 2, b)
                  , (lft, 0, 0, y), (lft, 0, 1, o), (lft, 0, 2, o), (lft, 1, 0, y), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, y), (lft, 2, 1, o), (lft, 2, 2, o)
                  , (bot, 0, 0, y), (bot, 0, 1, y), (bot, 0, 2, y), (bot, 1, 0, y), (bot, 1, 1, y), (bot, 1, 2, y), (bot, 2, 0, r), (bot, 2, 1, r), (bot, 2, 2, r) ]
-      rotated = toCubeRotation (toVectorRotation backL) Cube.solvedCube
+      rotated = rotate backL Cube.solvedCube
   in expected == rotated
   && testRotations backL
 
@@ -181,7 +181,7 @@ testCombined =
                  , (lft, 0, 0, w), (lft, 0, 1, w), (lft, 0, 2, w), (lft, 1, 0, b), (lft, 1, 1, o), (lft, 1, 2, o), (lft, 2, 0, y), (lft, 2, 1, g), (lft, 2, 2, r)
                  , (bot, 0, 0, g), (bot, 0, 1, g), (bot, 0, 2, r), (bot, 1, 0, o), (bot, 1, 1, y), (bot, 1, 2, r), (bot, 2, 0, o), (bot, 2, 1, b), (bot, 2, 2, b) ]
       rotation = bottomL <> leftL <> backL <> rightL <> frontL <> topL
-      rotated = toCubeRotation (toVectorRotation rotation) Cube.solvedCube
+      rotated = rotate rotation Cube.solvedCube
   in expected == rotated
   && testRotations backL
 

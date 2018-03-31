@@ -19,6 +19,9 @@ type VectorRotation = Vector Z -> Vector Z
 toVectorRotation :: MatrixRotation -> VectorRotation
 toVectorRotation = (#>)
 
+rotate :: MatrixRotation -> Cube -> Cube
+rotate rotation = toCubeRotation $ toVectorRotation rotation
+
 type MatrixRotation = Matrix Z
 
 showMatrixRotation :: MatrixRotation -> String
