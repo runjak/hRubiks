@@ -27,8 +27,14 @@ testBetween =
           (RotationPath.rotate Rotation.frontR) Cube.solvedCube
   in cube' == expectedCube && [Rotation.topR] == DList.toList rotationLog
 
+testRotations =
+  let expectedCube = Rotation.rotate Rotation.frontL $ Rotation.rotate Rotation.topR Cube.solvedCube
+      (cube, _) = Writer.runWriter $ RotationPath.rotations [Rotation.topR, Rotation.frontL] Cube.solvedCube
+  in cube == expectedCube
+
 tests :: [(String, Bool)]
 tests = [
     ("RotationPath.rotate", testRotate)
   , ("RotationPath.between", testBetween)
+  , ("RotationPath.rotations", testRotations)
   ]

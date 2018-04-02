@@ -25,3 +25,7 @@ between prefix suffix λ cube = do
   let (cube', rotationLog) = Writer.runWriter . λ $ Rotation.rotate prefix cube
   Writer.tell $ DList.map (\r -> suffix <> r <> prefix) rotationLog
   return $ Rotation.rotate suffix cube'
+
+rotations :: [MatrixRotation] -> CubeMutation
+rotations [] cube = return cube
+rotations (r:rs) cube = rotate r cube >>= rotations rs
