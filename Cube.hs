@@ -1,5 +1,6 @@
 module Cube where
 
+import Prelude hiding (Left, Right)
 import Data.Function (on)
 import Numeric.LinearAlgebra (Z, Vector)
 import qualified Data.List as List
@@ -43,3 +44,11 @@ vectorToCube = zipWith go solvedCube . fmap toColor . LA.toList
 
     go :: (Side, Int, Int, Color) -> Color -> (Side, Int, Int, Color)
     go (s, x, y, _) c = (s, x, y, c)
+
+oppositeSides :: Side -> Side -> Bool
+oppositeSides Top Bottom = True
+oppositeSides Front Back = True
+oppositeSides Right Left = True
+oppositeSides x y
+  | fromEnum x > fromEnum y = oppositeSides y x
+  | otherwise = False

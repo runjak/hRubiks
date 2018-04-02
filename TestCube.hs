@@ -1,5 +1,7 @@
 module TestCube where
 
+import Prelude hiding (Left, Right)
+
 import Cube
 import qualified Data.List as List
 
@@ -19,7 +21,21 @@ testFromToVector =
   let solvedCube' = vectorToCube $ cubeToVector solvedCube
   in solvedCube' == solvedCube
 
+testOppositeSides =
+  let sidePairs = [(x, y) | x <- [Top ..], y <- [Top ..]]
+      opposites = filter (uncurry oppositeSides) sidePairs
+      expected = [
+          (Top, Bottom)
+        , (Front, Back)
+        , (Right, Left)
+        , (Back, Front)
+        , (Left, Right)
+        , (Bottom, Top)
+        ]
+  in opposites == expected
+
 tests = [ ("solvedCube", testSolvedCube)
         , ("computeIndex", testComputeIndex)
         , ("fromToVector", testFromToVector)
+        , ("oppositeSides", testOppositeSides)
         ]
