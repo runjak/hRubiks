@@ -52,3 +52,8 @@ oppositeSides Right Left = True
 oppositeSides x y
   | fromEnum x > fromEnum y = oppositeSides y x
   | otherwise = False
+
+adjacentSides :: Side -> Side -> Bool
+adjacentSides x y
+  | x == y = False
+  | otherwise = not $ oppositeSides x y

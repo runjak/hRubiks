@@ -34,8 +34,15 @@ testOppositeSides =
         ]
   in opposites == expected
 
+testAdjacentSides =
+  let expected = all (uncurry adjacentSides) [(Top, Front), (Right, Back)]
+      noOpposites = not $ any (uncurry adjacentSides) [(Front, Back), (Left, Right)]
+      noSelfs = not $ any (uncurry adjacentSides) [(x, x) | x <- [Top ..]]
+  in expected && noOpposites && noSelfs
+
 tests = [ ("solvedCube", testSolvedCube)
         , ("computeIndex", testComputeIndex)
         , ("fromToVector", testFromToVector)
         , ("oppositeSides", testOppositeSides)
+        , ("adjacentSides", testAdjacentSides)
         ]
